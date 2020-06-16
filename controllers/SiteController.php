@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\LoanForm;
+use app\services\LoanService;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -13,6 +14,15 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+    private $service;
+
+    public function __construct($id, $module, LoanService $service, $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->service = $service;
+    }
+
+
     /**
      * {@inheritdoc}
      */
@@ -67,10 +77,7 @@ class SiteController extends Controller
 
         if ($loanForm->load(Yii::$app->request->post()) && $loanForm->validate()) {
             try {
-                echo "<pre>";
-                var_dump($loanForm);
-                echo "</pre>";
-                exit;
+                $loan = $this->service->create($loanForm);
 
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
