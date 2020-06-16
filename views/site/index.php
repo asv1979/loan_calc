@@ -1,51 +1,49 @@
 <?php
 
-/* @var $this yii\web\View */
+use kartik\date\DatePicker;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
-$this->title = 'My Yii Application';
+/* @var $this yii\web\View */
+/* @var $model app\models\LoginForm */
+/* @var $items array */
+
+$this->title = 'The loan creator';
+
 ?>
 <div class="site-index">
-
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
     <div class="body-content">
 
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <div class="col-lg-12">
+                <h2>Create your loan</h2>
+                <div class="brand-form">
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                    <?php $form = ActiveForm::begin(); ?>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+                    <div class="box box-default">
+                        <div class="box-body">
+                            <?= $form->field($model, 'start_date')->widget(DatePicker::class, [
+                                'options' => ['placeholder' => 'Select issue date from tomorrow...'],
+                                'pluginOptions' => [
+                                    'autoclose' => true,
+                                    'format' => 'dd-mm-yyyy',
+                                    'startDate' => date('d-m-yy', strtotime('+1 day'))
+                                ]
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                            ]) ?>
+                            <?= $form->field($model, 'sum')->input('number') ?>
+                            <?= $form->field($model, 'month_term')->dropDownList($items); ?>
+                        </div>
+                    </div>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+                    <div class="form-group">
+                        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                    </div>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                    <?php ActiveForm::end(); ?>
+                </div>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
             </div>
         </div>
 

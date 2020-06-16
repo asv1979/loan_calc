@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\LoanForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -61,7 +62,31 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $loanForm = new LoanForm();
+        $items = [];
+
+        if ($loanForm->load(Yii::$app->request->post()) && $loanForm->validate()) {
+            try {
+                echo "<pre>";
+                var_dump($loanForm);
+                echo "</pre>";
+                exit;
+
+            } catch (\DomainException $e) {
+                Yii::$app->errorHandler->logException($e);
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
+            return $this->goBack();
+        } else {
+            for ($i = 2; $i <= 24; $i++) {
+                $items[$i] = $i;
+            }
+        }
+
+        return $this->render('index', [
+            'model' => $loanForm,
+            'items' => $items
+        ]);
     }
 
     /**
