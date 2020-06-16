@@ -18,10 +18,8 @@ class m200616_120659_create_loans_table extends Migration
             'id' => $this->primaryKey(),
             'start_date' => $this->string(10),
             'sum' => $this->integer(),
-            'percent_sum' => $this->integer(),
             'month_term' => $this->integer(),
             'year_percent' => $this->integer(),
-            'whole_sum' => $this->integer()
         ], $tableOptions);
     }
 

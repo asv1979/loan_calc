@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\LoanForm;
 use app\services\LoanService;
+use app\services\PaymentService;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -14,12 +15,15 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
-    private $service;
+    private $loan_service;
 
-    public function __construct($id, $module, LoanService $service, $config = [])
+    private $payment_service;
+
+    public function __construct($id, $module, LoanService $loan_service, PaymentService $payment_service,$config = [])
     {
         parent::__construct($id, $module, $config);
-        $this->service = $service;
+        $this->loan_service = $loan_service;
+        $this->payment_service = $payment_service;
     }
 
 
@@ -66,9 +70,7 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays homepage.
-     *
-     * @return string
+     * @return string|Response
      */
     public function actionIndex()
     {
@@ -77,8 +79,8 @@ class SiteController extends Controller
 
         if ($loanForm->load(Yii::$app->request->post()) && $loanForm->validate()) {
             try {
-                $loan = $this->service->create($loanForm);
-
+                $loan = $this->loan_service->create($loanForm);
+                $this->payment_service->create($loan);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());

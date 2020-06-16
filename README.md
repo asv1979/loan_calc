@@ -1,27 +1,30 @@
-<p align="center">
-    <h1 align="center">Yii 2 Basic - The loan calculator with payments schedule</h1>
-    <br>
-</p>
 
+PROJECT
+------------
 
+Yii 2 Basic - The loan calculator with payments schedule
 
 REQUIREMENTS
 ------------
 
 The minimum requirement by this project template that your Web server supports PHP 7.2.0
 
-INSTALLATION
+
 ------------
 
 ### Install with Docker
 
-Run
+Install
 
     composer run-script docker:build
     
 Stop 
 
-    composer run-script docker:cleanup    
+    composer run-script docker:cleanup
+      
+Update
+
+    composer run-script docker:start
     
 Start the container
 
@@ -30,6 +33,14 @@ Start the container
 You can then access the application through the following URL:
 
     http://127.0.0.1:8000
+    
+    
+CHANGE
+-------------
+    
+You can change the year's percent (which we get through multiply it to 12) in the env file:
+
+    YEAR_PERCENT=60
 
 
 

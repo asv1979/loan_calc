@@ -13,7 +13,6 @@ use Yii;
  * @property int|null $percent_sum
  * @property int|null $month_term
  * @property int|null $year_percent
- * @property int|null $whole_sum
  */
 class Loan extends \yii\db\ActiveRecord
 {
@@ -31,7 +30,7 @@ class Loan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sum', 'percent_sum', 'month_term', 'year_percent', 'whole_sum'], 'integer'],
+            [['sum','month_term', 'year_percent'], 'integer'],
             [['start_date'], 'string', 'max' => 10],
         ];
     }
@@ -39,21 +38,17 @@ class Loan extends \yii\db\ActiveRecord
     /**
      * @param $start_date
      * @param $sum
-     * @param $percent_sum
      * @param $month_term
      * @param $year_percent
-     * @param $whole_sum
      * @return static
      */
-    public static function create($start_date, $sum, $percent_sum, $month_term, $year_percent, $whole_sum): self
+    public static function create($start_date, $sum, $month_term, $year_percent): self
     {
         $loan = new static();
         $loan->start_date = $start_date;
         $loan->sum = $sum;
-        $loan->percent_sum = $percent_sum;
         $loan->month_term = $month_term;
         $loan->year_percent = $year_percent;
-        $loan->whole_sum = $whole_sum;
         return $loan;
     }
 }
