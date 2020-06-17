@@ -70,7 +70,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; Alex Vasiliev 2017 - <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Alexey Vasiliev 2017 - <?= date('Y') ?></p>
     </div>
 </footer>
 
