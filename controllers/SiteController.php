@@ -81,6 +81,7 @@ class SiteController extends Controller
             try {
                 $loan = $this->loan_service->create($loanForm);
                 $this->payment_service->create($loan);
+                return $this->redirect(['/payment/'. $loan->id]);
             } catch (\DomainException $e) {
                 Yii::$app->errorHandler->logException($e);
                 Yii::$app->session->setFlash('error', $e->getMessage());
@@ -111,7 +112,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect(['manage']);
         }
 
         $model->password = '';
@@ -158,5 +159,9 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionManage(){
+        return $this->render('manage');
     }
 }

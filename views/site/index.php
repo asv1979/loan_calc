@@ -14,8 +14,8 @@ $this->title = 'The loan creator';
 <div class="site-index">
     <div class="body-content">
 
-        <div class="row">
-            <div class="col-lg-12">
+        <div class="row get-loan">
+            <div class="col-lg-6 col-lg-offset-3">
                 <h2>Create your loan</h2>
                 <div class="brand-form">
 
@@ -38,7 +38,7 @@ $this->title = 'The loan creator';
                     </div>
 
                     <div class="form-group">
-                        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                        <?= Html::submitButton('Get the loan', ['class' => 'btn btn-success']) ?>
                     </div>
 
                     <?php ActiveForm::end(); ?>

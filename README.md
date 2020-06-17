@@ -43,9 +43,10 @@ You can change the year's percent (which we get through multiply it to 12) in th
     YEAR_PERCENT=60
 
 
+GET ALL LOANS
+-------------
 
-
-
+After login webmaster/webmaster
 
 
 
