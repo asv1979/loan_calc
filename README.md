@@ -26,7 +26,7 @@ Update
 
     composer run-script docker:start
     
-Start the container
+Start containers
 
     docker-compose up -d
     
